@@ -12,7 +12,7 @@ export default class Map {
     this.imageData = imageData;
     this.mapData = mapData;
 
-    this.mode = "draw";
+    this.mode = "";
 
     this.capture = false;
     this.line = [];
@@ -55,20 +55,16 @@ export default class Map {
   addEventListenerMap(event, callback) {
     // console.log(event, callback);
 
-    this.map?.on(event, callback);
+    this.map?.on(event, callback.bind(this));
   }
 
   mouseDown(e) {
-    console.log(this.capture);
     if (this.mode == "draw") {
       this.capture = true;
-      console.log(this.capture);
     }
   }
 
   mouseMove(e) {
-    console.log("sd");
-
     if (this.capture) {
       this.line.push(e.latlng);
       this.lineVisual.push(this.leaflet?.polyline(this.line).addTo(this.map));
@@ -76,7 +72,7 @@ export default class Map {
   }
 
   mouseUp(e) {
-    console.log(this.capture);
+    console.log(this.capture, this.line, this.lineVisual);
 
     if (this.capture) {
       this.lineVisual.forEach((elm) => {
@@ -229,7 +225,7 @@ export default class Map {
   }
 
   addLine(coordinates, existing) {
-    // console.log(coordinates);
+    console.log(coordinates);
 
     let polyLine = this.leaflet
       ?.polyline(coordinates)

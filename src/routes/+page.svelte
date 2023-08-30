@@ -22,14 +22,18 @@
 </svelte:head>
 
 <section>
-  <div
-    bind:this={mapElement}
-    id="map"
-    class=" h-screen w-screen overflow-hidden"
-  />
+  <div bind:this={mapElement} id="map" class="screen" />
 </section>
 
 <style>
+  @import "leaflet/dist/leaflet.css";
+  .screen {
+    z-index: 10;
+    background-color: rgba(240, 248, 255, 0);
+    width: 100vw;
+    height: 100vh;
+    user-select: none;
+  }
   section {
     display: flex;
     flex-direction: column;
